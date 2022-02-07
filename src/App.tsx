@@ -11,7 +11,8 @@ function App() {
   const [currencyTo, setCurrencyTo] = useState('aed');
   const [rates, setRates] = useState([]);
 
-  const date = new Date().toISOString().slice(0, 10);
+  const test_date = useState('2020-12-23');
+  const date = test_date.toISOString().slice(0, 10);
   const selectedCurrency = 'usd';
 
   const BASE_API_URL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/${selectedCurrency}.json`;
