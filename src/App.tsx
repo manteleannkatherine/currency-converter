@@ -7,46 +7,77 @@ function App() {
 
   const [amountFrom, setAmountFrom] = useState(1);
   const [amountTo, setAmountTo] = useState(1);
-  const [currencyFrom, setCurrencyFrom] = useState('USD');
-  const [currencyTo, setCurrencyTo] = useState('USD');
-
+  const [currencyFrom, setCurrencyFrom] = useState('usd');
+  const [currencyTo, setCurrencyTo] = useState('aed');
   const [rates, setRates] = useState([]);
-  const [date, setDate] = useState(new Date());
+
+  const date = new Date().toISOString().slice(0, 10);
+  const selectedCurrency = 'usd';
+
+  const BASE_API_URL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/${date}/currencies/${selectedCurrency}.json`;
 
   useEffect(() => {
-    axios.get(`https://github.com/fawazahmed0/currency-api/tree/1/${date.toISOString().slice(0, 10)}`)
+    axios.get(BASE_API_URL)
       .then(res => { 
         try {
           setRates(res.data.rates);
+
+          console.log(rates);
         }
         catch {
           console.log("Exceeded API call limit")
         }
       }
-    )}, [rates]);
+    )}, []);
 
+  useEffect(() => {
+    if (!rates) {
+      handleAmountFromChange(1);
+    }
+  }, [rates]);
   
-
-  const handleAmountChange = (amountFrom : number) => {
-    setAmountTo(amountFrom * rates[0] / rates[1]);
-    setAmountFrom(amountFrom)
+  
+  function format(amount : number) {
+    return amount.toFixed(4);
   }
 
-  const handleCurrencyChange = (currency : string) => {
-    setAmountTo(amountFrom * rates[0] / rates[1]);
+  function handleAmountFromChange(amount : number) {
+    setAmountTo(amount * rates[1] / rates[0]);
+    setAmountFrom(amount);
+  }
+
+  function handleCurrencyFromChange(currency : string) {
+    setAmountTo(amountFrom * rates[1] / rates[0]);
     setCurrencyFrom(currency);
+  }
+
+  function handleAmountToChange(amount : number) {
+    setAmountFrom(amount * rates[0] / rates[1]);
+    setAmountTo(amount);
+  }
+
+  function handleCurrencyToChange(currency : string) {
+    setAmountFrom(amountFrom * rates[0] / rates[1]);
+    setCurrencyTo(currency);
   }
   
   return (
     <div>
+      <h1>Currency Converter</h1>
       <CurrencyInput 
         currencies={Object.keys(rates)} 
         amount={amountFrom} 
-        currency={currencyFrom} />
+        currency={currencyFrom} 
+        onAmountChange={handleAmountFromChange}
+        onCurrencyChange={handleCurrencyFromChange}
+        />
       <CurrencyInput 
         currencies={Object.keys(rates)} 
         amount={amountTo} 
-        currency={currencyTo} />
+        currency={currencyTo} 
+        onAmountChange={handleAmountToChange}
+        onCurrencyChange={handleCurrencyToChange}
+        />
     </div>
   );
 }
