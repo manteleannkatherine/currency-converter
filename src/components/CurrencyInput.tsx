@@ -24,10 +24,10 @@ function CurrencyInput(props : any) {
         <div className="group">
             <input 
                 type="text" 
-                value={amountValue ?? props.amount} 
+                value={props.amount} 
                 onChange={(e) => handleAmountChange(e)} />
             <select 
-                value={currencyValue ?? props.currency} 
+                value={props.currency} 
                 onChange={(e) => handleCurrencyChange(e)}>
                 {props.currencies.map((currency : any) => (
                     <option value={currency}>{currency}</option>
