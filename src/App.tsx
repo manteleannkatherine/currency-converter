@@ -41,13 +41,11 @@ function App() {
       <CurrencyInput 
         currencies={Object.keys(rates)} 
         amount={amountFrom} 
-        currency={currencyFrom}
-      />
+        currency={currencyFrom} />
       <CurrencyInput 
         currencies={Object.keys(rates)} 
         amount={amountTo} 
-        currency={currencyTo}
-      />
+        currency={currencyTo} />
     </div>
   );
 }
