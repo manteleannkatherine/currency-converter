@@ -8,7 +8,6 @@ function App() {
   const [amountFrom, setAmountFrom] = useState(1);
   const [amountTo, setAmountTo] = useState(1);
   const [currencyFrom, setCurrencyFrom] = useState('USD');
-  //eslint-disable-next-line no-unused-vars
   const [currencyTo, setCurrencyTo] = useState('USD');
 
   const [rates, setRates] = useState([]);
@@ -27,14 +26,12 @@ function App() {
       }
     )}, [rates]);
 
-  //eslint-disable-next-line no-unused-vars
-  const handleAmountChange = (amountFrom : any) => {
+  const handleAmountChange = (amountFrom : number) => {
     setAmountTo(amountFrom * rates[0] / rates[1]);
     setAmountFrom(amountFrom)
   }
 
-  //eslint-disable-next-line no-unused-vars
-  const handleCurrencyChange = (currency : any) => {
+  const handleCurrencyChange = (currency : string) => {
     setAmountTo(amountFrom * rates[0] / rates[1]);
     setCurrencyFrom(currency);
   }

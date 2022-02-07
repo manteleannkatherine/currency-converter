@@ -7,12 +7,9 @@ CurrencyInput.propTypes = {
     currencies: PropTypes.array
 }
 
-function CurrencyInput(props : any) {
-
-    //eslint-disable-next-line no-unused-vars
-    const [amountValue, setAmountValue] = useState(1);
+function CurrencyInput(props:any) {
     
-    //eslint-disable-next-line no-unused-vars
+    const [amountValue, setAmountValue] = useState(1);
     const [currencyValue, setCurrencyValue] = useState([]);
 
     const handleAmountChange = (e : any) => {
