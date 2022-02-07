@@ -7,7 +7,7 @@ CurrencyInput.propTypes = {
     currencies: PropTypes.array
 }
 
-function CurrencyInput(props:any) {
+function CurrencyInput(props : any) {
     
     const [amountValue, setAmountValue] = useState(1);
     const [currencyValue, setCurrencyValue] = useState([]);

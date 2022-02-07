@@ -11,20 +11,21 @@ function App() {
   const [currencyTo, setCurrencyTo] = useState('USD');
 
   const [rates, setRates] = useState([]);
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    axios.get('http://github.com/fawazahmed0/currency-api/tree/1/2020-11-30')
+    axios.get(`https://github.com/fawazahmed0/currency-api/tree/1/${date.toISOString().slice(0, 10)}`)
       .then(res => { 
         try {
           setRates(res.data.rates);
-
-          console.log(rates)
         }
         catch {
           console.log("Exceeded API call limit")
         }
       }
     )}, [rates]);
+
+  
 
   const handleAmountChange = (amountFrom : number) => {
     setAmountTo(amountFrom * rates[0] / rates[1]);
